@@ -39,6 +39,3 @@ Pour installer ce script dans votre propre environnement Google Workspace, suive
    - Cliquez sur l'icône de disquette 💾 pour tout sauvegarder.
    - Fermez l'onglet Apps Script et rafraîchissez votre présentation Google Slides (F5).
    - Un nouveau menu **"🌐 Traducteur"** apparaîtra en haut. Lors de la première exécution, Google vous demandera d'autoriser les permissions d'accès.
-
-## 📄 Licence
-Ce projet est sous licence MIT. Consultez le fichier `LICENSE` pour plus de
