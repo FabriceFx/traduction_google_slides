@@ -1,0 +1,34 @@
+{
+  "timeZone": "Europe/Paris",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "urlFetchWhitelist": [
+    "https://translation.googleapis.com/"
+  ],
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/presentations",
+    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/script.container.ui",
+    "https://www.googleapis.com/auth/script.external_request",
+    "https://www.googleapis.com/auth/cloud-translation"
+  ],
+  "addOns": {
+    "common": {
+      "name": "Traduction Google Slides",
+      "logoUrl": "https://www.gstatic.com/images/branding/product/1x/translate_48dp.png",
+      "layoutProperties": {
+        "primaryColor": "#0B57D0"
+      }
+    },
+    "slides": {}
+  },
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Drive",
+        "version": "v3",
+        "serviceId": "drive"
+      }
+    ]
+  }
+}
