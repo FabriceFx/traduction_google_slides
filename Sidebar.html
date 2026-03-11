@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&family=Google+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+
+/* ── M3 Design Tokens ─────────────────────────────────── */
+:root {
+ --md-primary: #0B57D0;
+ --md-on-primary: #FFFFFF;
+ --md-primary-container: #D3E3FD;
+ --md-on-primary-container: #041E49;
+ --md-secondary-container: #D7E3F7;
+ --md-on-secondary-container:#101C2B;
+ --md-surface: #F8F9FF;
+ --md-surface-container: #ECEEF8;
+ --md-surface-container-lo: #F2F4FE;
+ --md-on-surface: #191C20;
+ --md-on-surface-variant: #43474E;
+ --md-outline: #73777F;
+ --md-outline-variant: #C3C7CF;
+ --md-success: #146C2E;
+ --md-success-container: #C4EED0;
+ --md-error: #B3261E;
+ --md-error-container: #F9DEDC;
+
+ --shape-sm: 8px;
+ --shape-md: 12px;
+ --shape-lg: 16px;
+ --shape-xl: 28px;
+ --shape-full: 50px;
+
+ --ease-std: cubic-bezier(0.2, 0, 0, 1);
+ --dur-s: 200ms;
+ --dur-m: 300ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+ font-family: 'Roboto Flex', 'Google Sans', sans-serif;
+ font-size: 14px;
+ line-height: 1.5;
+ color: var(--md-on-surface);
+ background: var(--md-surface);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--md-outline-variant); border-radius: 4px; }
+
+/* ── Header ───────────────────────────────────────────── */
+.app-header {
+ position: relative;
+ background: var(--md-primary-container);
+ padding: 18px 16px 16px;
+ overflow: hidden;
+}
+.app-header::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background:
+ radial-gradient(ellipse 80% 60% at 110% 0%, rgba(11,87,208,.18) 0%, transparent 70%),
+ radial-gradient(ellipse 50% 80% at -10% 100%, rgba(11,87,208,.12) 0%, transparent 60%);
+ pointer-events: none;
+}
+.header-chip {
+ display: inline-flex;
+ align-items: center;
+ gap: 4px;
+ background: rgba(11,87,208,.12);
+ border: 1px solid rgba(11,87,208,.2);
+ border-radius: var(--shape-full);
+ padding: 2px 10px 2px 6px;
+ font-size: 11px;
+ font-weight: 500;
+ color: var(--md-primary);
+ letter-spacing: .3px;
+ margin-bottom: 8px;
+}
+.header-chip .material-icons-round { font-size: 14px; }
+.header-title {
+ font-family: 'Google Sans', sans-serif;
+ font-size: 20px;
+ font-weight: 600;
+ color: var(--md-on-primary-container);
+ line-height: 1.2;
+}
+.header-subtitle {
+ font-size: 12px;
+ color: var(--md-primary);
+ margin-top: 2px;
+ opacity: .85;
+}
+
+/* ── Pres Card ────────────────────────────────────────── */
+.pres-card {
+ margin: 12px 12px 0;
+ background: var(--md-surface-container-lo);
+ border: 1px solid var(--md-outline-variant);
+ border-radius: var(--shape-lg);
+ padding: 12px 14px;
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ animation: fadeUp var(--dur-m) var(--ease-std) both;
+}
+.pres-icon {
+ width: 36px; height: 36px;
+ border-radius: var(--shape-sm);
+ background: var(--md-primary-container);
+ display: flex; align-items: center; justify-content: center;
+ flex-shrink: 0;
+}
+.pres-icon .material-icons-round { font-size: 20px; color: var(--md-primary); }
+.pres-name {
+ font-size: 13px; font-weight: 500;
+ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pres-count { font-size: 11px; color: var(--md-on-surface-variant); margin-top: 1px; }
+
+/* ── Section Card ─────────────────────────────────────── */
+.section {
+ margin: 10px 12px 0;
+ background: var(--md-surface-container-lo);
+ border: 1px solid var(--md-outline-variant);
+ border-radius: var(--shape-xl);
+ padding: 16px;
+ animation: fadeUp var(--dur-m) var(--ease-std) both;
+}
+.section:nth-of-type(2) { animation-delay: 50ms; }
+.section:nth-of-type(3) { animation-delay: 100ms; }
+
+.section-label {
+ font-size: 11px; font-weight: 600;
+ text-transform: uppercase; letter-spacing: .8px;
+ color: var(--md-primary);
+ margin-bottom: 14px;
+}
+
+/* ── Fields ───────────────────────────────────────────── */
+.field { position: relative; margin-bottom: 12px; }
+.field:last-child { margin-bottom: 0; }
+
+.field-label {
+ display: block; font-size: 12px; font-weight: 500;
+ color: var(--md-on-surface-variant);
+ margin-bottom: 4px; padding-left: 4px;
+}
+
+.field select,
+.field input[type="text"] {
+ width: 100%;
+ padding: 10px 40px 10px 14px;
+ border: 1.5px solid var(--md-outline-variant);
+ border-radius: var(--shape-md);
+ font-family: inherit; font-size: 14px;
+ color: var(--md-on-surface);
+ background: var(--md-surface);
+ outline: none;
+ appearance: none; -webkit-appearance: none;
+ cursor: pointer;
+ transition:
+ border-color var(--dur-s) var(--ease-std),
+ box-shadow var(--dur-s) var(--ease-std),
+ background var(--dur-s) var(--ease-std);
+}
+.field select:hover,
+.field input:hover {
+ border-color: var(--md-on-surface-variant);
+ background: var(--md-surface-container);
+}
+.field select:focus,
+.field input:focus {
+ border-color: var(--md-primary);
+ border-width: 2px;
+ box-shadow: 0 0 0 3px rgba(11,87,208,.08);
+ background: var(--md-surface);
+}
+.field-arrow {
+ position: absolute; right: 12px; bottom: 11px;
+ pointer-events: none;
+ color: var(--md-on-surface-variant);
+ font-size: 18px;
+}
+
+/* ── Swap ─────────────────────────────────────────────── */
+.swap-row {
+ display: flex; align-items: center; gap: 8px;
+ margin: 4px 0 8px;
+}
+.swap-line { flex: 1; height: 1px; background: var(--md-outline-variant); }
+.swap-btn {
+ position: relative;
+ width: 36px; height: 36px;
+ border: 1.5px solid var(--md-outline-variant);
+ border-radius: var(--shape-full);
+ background: var(--md-surface);
+ cursor: pointer;
+ display: flex; align-items: center; justify-content: center;
+ color: var(--md-primary);
+ overflow: hidden;
+ transition:
+ border-color var(--dur-s) var(--ease-std),
+ transform var(--dur-s) var(--ease-std);
+}
+.swap-btn::before {
+ content: ''; position: absolute; inset: 0;
+ background: var(--md-primary); opacity: 0;
+ transition: opacity var(--dur-s) var(--ease-std);
+}
+.swap-btn:hover { border-color: var(--md-primary); }
+.swap-btn:hover::before { opacity: .08; }
+.swap-btn:active { transform: rotate(180deg) scale(.9); }
+.swap-btn .material-icons-round { font-size: 18px; position: relative; }
+
+/* ── Divider ──────────────────────────────────────────── */
+.divider { height: 1px; background: var(--md-outline-variant); margin: 12px 0; }
+
+/* ── Checkboxes ───────────────────────────────────────── */
+.check-row {
+ display: flex; align-items: flex-start; gap: 12px;
+ padding: 8px 6px;
+ cursor: pointer;
+ border-radius: var(--shape-sm);
+ transition: background var(--dur-s) var(--ease-std);
+}
+.check-row:hover { background: rgba(11,87,208,.06); }
+.check-row input[type="checkbox"] { display: none; }
+
+.checkbox-visual {
+ width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+ border: 2px solid var(--md-outline);
+ border-radius: 4px;
+ display: flex; align-items: center; justify-content: center;
+ transition:
+ background var(--dur-s) var(--ease-std),
+ border-color var(--dur-s) var(--ease-std);
+}
+.checkbox-visual .material-icons-round {
+ font-size: 14px; color: var(--md-on-primary);
+ opacity: 0; transform: scale(.4);
+ transition:
+ opacity var(--dur-s) var(--ease-std),
+ transform var(--dur-s) var(--ease-std);
+}
+input[type="checkbox"]:checked + .checkbox-visual {
+ background: var(--md-primary); border-color: var(--md-primary);
+}
+input[type="checkbox"]:checked + .checkbox-visual .material-icons-round {
+ opacity: 1; transform: scale(1);
+}
+.check-label { font-size: 13px; color: var(--md-on-surface); }
+.check-sublabel { font-size: 11px; color: var(--md-on-surface-variant); display: block; margin-top: 1px; }
+
+/* ── Range hint ───────────────────────────────────────── */
+.range-hint {
+ font-size: 11px; color: var(--md-on-surface-variant);
+ margin-top: 4px; padding-left: 4px;
+ display: flex; align-items: center; gap: 4px;
+}
+.range-hint .material-icons-round { font-size: 12px; }
+
+/* ── Translate Button ─────────────────────────────────── */
+.translate-wrap {
+ padding: 12px 12px 0;
+ animation: fadeUp var(--dur-m) var(--ease-std) 150ms both;
+}
+.translate-btn {
+ position: relative;
+ display: flex; align-items: center; justify-content: center; gap: 8px;
+ width: 100%; padding: 14px 24px;
+ background: var(--md-primary);
+ color: var(--md-on-primary);
+ border: none; border-radius: var(--shape-xl);
+ font-family: inherit; font-size: 15px; font-weight: 600; letter-spacing: .25px;
+ cursor: pointer; overflow: hidden;
+ box-shadow: 0 1px 2px rgba(11,87,208,.3), 0 1px 3px 1px rgba(11,87,208,.15);
+ transition:
+ box-shadow var(--dur-s) var(--ease-std),
+ transform var(--dur-s) var(--ease-std);
+}
+.translate-btn::before {
+ content: ''; position: absolute; inset: 0;
+ background: white; opacity: 0;
+ transition: opacity var(--dur-s) var(--ease-std);
+}
+.translate-btn:hover { box-shadow: 0 1px 2px rgba(11,87,208,.4), 0 2px 6px 2px rgba(11,87,208,.2); }
+.translate-btn:hover::before { opacity: .08; }
+.translate-btn:active { transform: scale(.98); box-shadow: none; }
+.translate-btn:disabled {
+ background: rgba(25,28,32,.12); color: rgba(25,28,32,.38);
+ box-shadow: none; cursor: not-allowed;
+}
+.translate-btn .material-icons-round,
+.translate-btn span { position: relative; }
+.translate-btn .material-icons-round { font-size: 20px; }
+
+/* ── Status ───────────────────────────────────────────── */
+#status {
+ margin: 10px 12px 0;
+ padding: 12px 14px;
+ border-radius: var(--shape-lg);
+ font-size: 13px;
+ display: none;
+ animation: fadeUp var(--dur-s) var(--ease-std) both;
+}
+#status.loading {
+ background: var(--md-primary-container);
+ color: var(--md-on-primary-container);
+ display: flex; align-items: center; gap: 10px;
+}
+#status.success { background: var(--md-success-container); color: var(--md-success); display: block; }
+#status.error { background: var(--md-error-container); color: var(--md-error); display: block; }
+
+.status-icon { font-size: 18px; flex-shrink: 0; }
+
+.open-link {
+ display: inline-flex; align-items: center; gap: 4px;
+ margin-top: 8px; font-size: 12px; font-weight: 500;
+ color: var(--md-success); text-decoration: none;
+ padding: 4px 10px; border-radius: var(--shape-full);
+ background: rgba(20,108,46,.1);
+ transition: background var(--dur-s);
+}
+.open-link:hover { background: rgba(20,108,46,.18); }
+.open-link .material-icons-round { font-size: 14px; }
+
+/* ── Spinner ──────────────────────────────────────────── */
+.spinner {
+ width: 18px; height: 18px; flex-shrink: 0;
+ border: 2.5px solid rgba(11,87,208,.25);
+ border-top-color: var(--md-primary);
+ border-radius: 50%;
+ animation: spin 600ms linear infinite;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+.footer {
+ padding: 12px 16px 16px;
+ text-align: center;
+ font-size: 11px;
+ color: var(--md-on-surface-variant);
+ opacity: .5;
+}
+
+/* ── Animations ───────────────────────────────────────── */
+@keyframes fadeUp {
+ from { opacity: 0; transform: translateY(8px); }
+ to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="app-header">
+ <div class="header-chip">
+ <span class="material-icons-round">translate</span>
+ Powered by Google Translate
+ </div>
+ <div class="header-title">Traducteur de slides</div>
+ <div class="header-subtitle">Traduisez votre présentation en un clic</div>
+</div>
+
+<!-- Présentation active -->
+<div class="pres-card">
+ <div class="pres-icon">
+ <span class="material-icons-round">slideshow</span>
+ </div>
+ <div>
+ <div class="pres-name" id="presName">Chargement…</div>
+ <div class="pres-count" id="presSlides"></div>
+ </div>
+</div>
+
+<!-- Langues -->
+<div class="section">
+ <div class="section-label">Langues</div>
+
+ <div class="field">
+ <label class="field-label" for="sourceLang">Langue source</label>
+ <select id="sourceLang"></select>
+ <span class="field-arrow material-icons-round">expand_more</span>
+ </div>
+
+ <div class="swap-row">
+ <div class="swap-line"></div>
+ <button class="swap-btn" id="swapBtn" title="Inverser les langues">
+ <span class="material-icons-round">swap_vert</span>
+ </button>
+ <div class="swap-line"></div>
+ </div>
+
+ <div class="field">
+ <label class="field-label" for="targetLang">Langue cible</label>
+ <select id="targetLang"></select>
+ <span class="field-arrow material-icons-round">expand_more</span>
+ </div>
+</div>
+
+<!-- Options -->
+<div class="section">
+ <div class="section-label">Options</div>
+
+ <div class="field">
+ <label class="field-label" for="slideRange">Slides à traduire</label>
+ <select id="slideRange" onchange="toggleCustomRange()">
+ <option value="all">Toutes les slides</option>
+ <option value="custom">Plage personnalisée…</option>
+ </select>
+ <span class="field-arrow material-icons-round">expand_more</span>
+ </div>
+
+ <div id="customRangeRow" style="display:none" class="field">
+ <label class="field-label" for="customRange">Numéros de slides</label>
+ <input type="text" id="customRange" placeholder="ex : 1, 3, 5-7">
+ <div class="range-hint">
+ <span class="material-icons-round">info</span>
+ Virgules pour séparer, tiret pour les plages
+ </div>
+ </div>
+
+ <div class="divider"></div>
+
+ <label class="check-row">
+ <input type="checkbox" id="createCopy" checked>
+ <div class="checkbox-visual"><span class="material-icons-round">check</span></div>
+ <div>
+ <span class="check-label">Créer une copie traduite</span>
+ <span class="check-sublabel">Recommandé — l'original n'est pas modifié</span>
+ </div>
+ </label>
+
+ <label class="check-row">
+ <input type="checkbox" id="translateNotes">
+ <div class="checkbox-visual"><span class="material-icons-round">check</span></div>
+ <div>
+ <span class="check-label">Traduire les notes</span>
+ <span class="check-sublabel">Notes du présentateur incluses</span>
+ </div>
+ </label>
+</div>
+
+<!-- Bouton -->
+<div class="translate-wrap">
+ <button class="translate-btn" id="translateBtn" onclick="startTranslation()">
+ <span class="material-icons-round">translate</span>
+ <span>Traduire la présentation</span>
+ </button>
+</div>
+
+<!-- Statut -->
+<div id="status"></div>
+
+<!-- Footer -->
+<div class="footer">Fabrice Faucheux</div>
+
+<script>
+ google.script.run
+ .withSuccessHandler(function(languages) {
+ var src = document.getElementById('sourceLang');
+ var tgt = document.getElementById('targetLang');
+ languages.forEach(function(l) {
+ src.add(new Option(l.label, l.code));
+ var o = new Option(l.label, l.code);
+ if (l.code === 'en') o.selected = true;
+ tgt.add(o);
+ });
+ })
+ .getLanguages();
+
+ google.script.run
+ .withSuccessHandler(function(info) {
+ document.getElementById('presName').textContent = info.name;
+ document.getElementById('presSlides').textContent =
+ info.slideCount + ' slide' + (info.slideCount > 1 ? 's' : '');
+ })
+ .getPresentationInfo();
+
+ document.getElementById('swapBtn').addEventListener('click', function() {
+ var src = document.getElementById('sourceLang');
+ var tgt = document.getElementById('targetLang');
+ if (src.value === 'auto') return;
+ var tmp = src.value; src.value = tgt.value; tgt.value = tmp;
+ });
+
+ function toggleCustomRange() {
+ document.getElementById('customRangeRow').style.display =
+ document.getElementById('slideRange').value === 'custom' ? 'block' : 'none';
+ }
+
+ function showStatus(type, html) {
+ var el = document.getElementById('status');
+ el.className = type; el.innerHTML = html; el.style.display = '';
+ }
+
+ function startTranslation() {
+ var btn = document.getElementById('translateBtn');
+ var sourceLang = document.getElementById('sourceLang').value;
+ var targetLang = document.getElementById('targetLang').value;
+
+ if (sourceLang !== 'auto' && sourceLang === targetLang) {
+ showStatus('error',
+ '<div style="display:flex;align-items:center;gap:8px">' +
+ '<span class="material-icons-round status-icon">warning</span>' +
+ 'La langue source et cible sont identiques.</div>');
+ return;
+ }
+
+ var slideRange = document.getElementById('slideRange').value;
+ if (slideRange === 'custom') {
+ slideRange = document.getElementById('customRange').value.trim();
+ if (!slideRange) {
+ showStatus('error',
+ '<div style="display:flex;align-items:center;gap:8px">' +
+ '<span class="material-icons-round status-icon">warning</span>' +
+ 'Veuillez saisir une plage de slides.</div>');
+ return;
+ }
+ }
+
+ btn.disabled = true;
+ showStatus('loading',
+ '<div class="spinner"></div><span>Traduction en cours, veuillez patienter…</span>');
+
+ google.script.run
+ .withSuccessHandler(function(result) {
+ btn.disabled = false;
+ if (result.success) {
+ var html =
+ '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">' +
+ '<span class="material-icons-round status-icon">check_circle</span>' +
+ '<strong>' + result.message + '</strong></div>';
+ if (result.url) {
+ html += '<a class="open-link" href="' + result.url + '" target="_blank">' +
+ '<span class="material-icons-round">open_in_new</span>Ouvrir la copie traduite</a>';
+ }
+ showStatus('success', html);
+ } else {
+ showStatus('error',
+ '<div style="display:flex;align-items:center;gap:8px">' +
+ '<span class="material-icons-round status-icon">error</span>' +
+ result.message + '</div>');
+ }
+ })
+ .withFailureHandler(function(err) {
+ btn.disabled = false;
+ showStatus('error',
+ '<div style="display:flex;align-items:center;gap:8px">' +
+ '<span class="material-icons-round status-icon">error</span>' +
+ 'Erreur : ' + err.message + '</div>');
+ })
+ .translatePresentation({
+ sourceLang: sourceLang,
+ targetLang: targetLang,
+ createCopy: document.getElementById('createCopy').checked,
+ slideRange: slideRange,
+ translateNotes: document.getElementById('translateNotes').checked
+ });
+ }
+</script>
+</body>
+</html>
