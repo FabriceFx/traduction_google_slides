@@ -8,15 +8,13 @@
 ## 📝 Description
 **Traducteur Google Slides** est un script Google Apps Script (GAS) complet qui ajoute une barre latérale personnalisée à vos présentations Google Slides. Il vous permet de traduire automatiquement et fidèlement tout le contenu textuel de votre présentation vers plus de 60 langues en utilisant le moteur natif de Google Translate.
 
-## ✨ Fonctionnalités Clés
+## ✨ Fonctionnalités clés
 - **Traduction intégrale** : Parcourt et traduit intelligemment les zones de texte classiques, les cellules de tableaux, ainsi que les notes du présentateur.
 - **Copie de sécurité** : Utilise l'API Drive Avancée (v3) pour générer une nouvelle copie de la présentation avec le titre traduit, garantissant que votre document original reste intact.
 - **Plage de slides personnalisée** : Permet de traduire l'intégralité du document ou seulement une sélection spécifique de diapositives (ex: `1, 3, 5-7`).
 - **Détection automatique de la langue** : Identifie dynamiquement la langue source du document pour une traduction simplifiée.
 - **Interface utilisateur moderne** : Barre latérale élégante développée avec les principes du Material Design 3 (M3).
 
-## 👨‍💻 Auteur
-Développé avec ❤️ par **Fabrice Faucheux**.
 
 ## 🚀 Instructions d'installation manuelle
 
